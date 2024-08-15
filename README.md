@@ -41,7 +41,7 @@ Este é um projeto de estudo sobre automação de testes de APIs Rest usando as 
 
 1 Clone o repositório:
 ```
-git clone https://github.com/leonardomelgarejo/*********.git
+git clone https://github.com/leonardomelgarejo/rest-assured-poc.git
 ```
 
 2 Instale as dependências do Maven:
