@@ -57,7 +57,7 @@ mvn clean install
 mvn clean test
 ```
 
-## Relatórios de Testes
+## Relatório de Testes
 
 * TO DO
 
