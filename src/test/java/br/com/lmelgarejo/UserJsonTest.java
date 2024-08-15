@@ -5,9 +5,13 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserJsonTest {
 
@@ -74,5 +78,35 @@ public class UserJsonTest {
             .statusCode(404)
             .body("error", is("Usuário inexistente"))
         ;
+    }
+
+    @Test
+    public void deveVerificarListaRaiz(){
+        given()
+        .when()
+            .get("https://restapi.wcaquino.me/users")
+        .then()
+            .statusCode(200)
+            .body("$", hasSize(3))
+            .body("name", hasItems("João da Silva","Maria Joaquina","Ana Júlia"))
+            .body("age[1]", is(25))
+            .body("filhos.name", hasItem(Arrays.asList("Zezinho","Luizinho")))
+            .body("salary", contains(1234.5678f, 2500, null))
+        ;
+    }
+
+    @Test
+    public void devoUnirJsonPathComJAVA(){
+        ArrayList<String> nomes =
+            given()
+            .when()
+                .get("https://restapi.wcaquino.me/users")
+            .then()
+                .statusCode(200)
+                .extract().path("name.findAll{it.startsWith('Maria')}")
+            ;
+        assertEquals(1, nomes.size());
+        assertTrue(nomes.get(0).equalsIgnoreCase("mAria Joaquina"));
+        assertEquals(nomes.get(0).toUpperCase(), "maria joaquina".toUpperCase());
     }
 }
