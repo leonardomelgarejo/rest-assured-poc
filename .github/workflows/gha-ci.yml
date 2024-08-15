@@ -21,4 +21,4 @@ jobs:
           java-version: 22
 
       - name: Run Maven tests
-        run: mvn clean test
+        run: mvn test
