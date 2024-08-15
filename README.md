@@ -1,3 +1,5 @@
+[![GHA-CI](https://github.com/leonardomelgarejo/rest-assured-poc/actions/workflows/gha-ci.yml/badge.svg)](https://github.com/leonardomelgarejo/rest-assured-poc/actions/workflows/gha-ci.yml)
+
 # Projeto de automação de testes de APIs Rest com as ferramentas Rest Assured + JUnit5 + Java
 
 ## Descrição
