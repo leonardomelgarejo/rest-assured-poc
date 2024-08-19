@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.*;
 @DisplayName("Classe de testes inicial")
 public class OlaMundoTest {
 
-    private static final Logger log = LogManager.getLogger(OlaMundoTest.class);
+    private static final Logger logger = LogManager.getLogger(OlaMundoTest.class);
 
     @Test
     @DisplayName("Olá mundo teste")
@@ -30,7 +30,7 @@ public class OlaMundoTest {
 
         ValidatableResponse validacao = response.then();
         validacao.statusCode(200);
-        log.info("Test Log4j");
+        logger.info("Test Log4j");
     }
 
     @Test
