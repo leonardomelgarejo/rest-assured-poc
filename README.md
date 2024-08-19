@@ -61,5 +61,9 @@ mvn clean test
 
 ## Relatório de Testes
 
-* TO DO
-
+* O relatório de testes é gerado pelo framework Allure Reports, de duas formas:
+    * Localmente:
+      * mvn allure:serve: Abrirá o relatório HTML no navegador
+      * mvn allure:report: Irá gerar o HTML na pasta target/site/allure-maven-plugin
+    * Remoto:
+      * No link: https://leonardomelgarejo.github.io/rest-assured-poc/
