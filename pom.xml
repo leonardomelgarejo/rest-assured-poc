@@ -98,6 +98,18 @@
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
             <artifactId>allure-attachments</artifactId>
             <version>${allure.version}</version>
         </dependency>
@@ -146,9 +158,6 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <systemPropertyVariables>
-                        <allure.results.directory>target/allure-results</allure.results.directory>
-                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -169,14 +178,6 @@
                         ${allure.cmd.download.url}/${allure.version}/allure-commandline-${allure.version}.zip
                     </allureDownloadUrl>
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>

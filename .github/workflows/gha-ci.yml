@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -20,39 +20,5 @@ jobs:
           distribution: oracle
           java-version: 22
 
-      - name: Build with Maven
-        run: mvn clean install
-
-      - name: Run Maven tests and generate Allure results
+      - name: Run Maven tests
         run: mvn test
-
-      - name: Generate Allure Report
-        run: |
-          mvn allure:report
-          mvn allure:serve & sleep 5 # Para gerar o relatório localmente (opcional)
-          mvn allure:report -Dallure.results.directory=target/allure-results -Dallure.report.directory=target/site/allure-maven
-
-      - name: Upload Allure Report as Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: allure-report
-          path: target/site/allure-maven
-
-  deploy:
-    needs: build
-    runs-on: windows-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Download Allure Report Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: allure-report
-          path: target/site/allure-maven
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: target/site/allure-maven
