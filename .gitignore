@@ -80,3 +80,8 @@ ntuser.ini
 # Arquivos de configuração do MacOS
 .AppleDouble
 .LSOverride
+
+# Outros
+.idea
+/target
+.allure
