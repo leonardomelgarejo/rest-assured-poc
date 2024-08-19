@@ -1,4 +1,4 @@
-package br.com.lmelgarejo.log;
+package br.com.lmelgarejo;
 
 import io.qameta.allure.Allure;
 import org.apache.logging.log4j.core.Appender;
