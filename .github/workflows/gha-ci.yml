@@ -20,5 +20,36 @@ jobs:
           distribution: oracle
           java-version: 22
 
+      - name: Build with Maven
+        run: mvn clean install
+
       - name: Run Maven tests
         run: mvn test
+
+      - name: Generate Allure Report
+        run: mvn verify
+
+      - name: Upload Allure Report as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure-report
+          path: target/site/allure-report
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Allure Report Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: allure-report
+          path: target/site/allure-report
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: target/site/allure-report
