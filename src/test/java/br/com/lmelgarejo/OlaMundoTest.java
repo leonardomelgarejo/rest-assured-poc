@@ -4,6 +4,7 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -13,9 +14,11 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@DisplayName("Classe de testes inicial")
 public class OlaMundoTest {
 
     @Test
+    @DisplayName("Olá mundo teste")
     public void testOlaMundo(){
         Response response = request(Method.GET, "http://restapi.wcaquino.me/ola");
         Assertions.assertEquals("Ola Mundo!", response.getBody().asString());
@@ -26,6 +29,7 @@ public class OlaMundoTest {
     }
 
     @Test
+    @DisplayName("Deve conhecer outras formas de usar o Rest-Assured")
     public void devoConhecerOutrasFormasRestAssured(){
         Response response = request(Method.GET, "http://restapi.wcaquino.me/ola");
         ValidatableResponse validacao = response.then();
@@ -42,6 +46,7 @@ public class OlaMundoTest {
     }
 
     @Test
+    @DisplayName("Devo conhecer o Matchers.Hamcrest")
     public void devoConhecerMatchersHamcrest(){
         assertThat("Maria", is("Maria"));
         assertThat(128, is(128));
@@ -64,6 +69,7 @@ public class OlaMundoTest {
     }
 
     @Test
+    @DisplayName("Devo validar o body da resposta")
     public void devoValidarBody(){
         given()
         .when()
