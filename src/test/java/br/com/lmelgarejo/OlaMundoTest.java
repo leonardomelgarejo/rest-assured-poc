@@ -3,6 +3,8 @@ package br.com.lmelgarejo;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,8 @@ import static org.hamcrest.Matchers.*;
 @DisplayName("Classe de testes inicial")
 public class OlaMundoTest {
 
+    private static final Logger log = LogManager.getLogger(OlaMundoTest.class);
+
     @Test
     @DisplayName("Olá mundo teste")
     public void testOlaMundo(){
@@ -26,6 +30,7 @@ public class OlaMundoTest {
 
         ValidatableResponse validacao = response.then();
         validacao.statusCode(200);
+        log.info("Test Log4j");
     }
 
     @Test
