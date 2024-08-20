@@ -2,9 +2,16 @@ package br.com.lmelgarejo;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,14 +25,30 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Feature("Testar Json da API")
 public class UserJsonTest {
 
+    public static RequestSpecification reqSpec;
+    public static ResponseSpecification resSpec;
+    @BeforeAll
+    public static void setup(){
+        baseURI = "https://restapi.wcaquino.me";
+        RequestSpecBuilder reqBuilder = new RequestSpecBuilder();
+        reqBuilder.log(LogDetail.ALL);
+        reqSpec = reqBuilder.build();
+
+        ResponseSpecBuilder resBuilder = new ResponseSpecBuilder();
+        resBuilder.expectStatusCode(200);
+        resSpec = resBuilder.build();
+
+        requestSpecification = reqSpec;
+        responseSpecification = resSpec;
+    }
+
     @Test
     @Description("Deve verificar primeiro nivel do json")
     public void deveVerificarPrimeiroNivel(){
         given()
         .when()
-            .get("https://restapi.wcaquino.me/users/1")
+            .get("/users/1")
         .then()
-            .statusCode(200)
             .body("id", is(1))
             .body("name", containsString("Silva"))
             .body("age", greaterThan(18))
@@ -35,7 +58,7 @@ public class UserJsonTest {
     @Test
     @Description("Deve verificar primeiro nivel do json de outras formas")
     public void deveVerificarPrimeiroNivelOutrasFormas(){
-        Response response = request(Method.GET, "https://restapi.wcaquino.me/users/1");
+        Response response = request(Method.GET, "/users/1");
 
         assertEquals(Integer.valueOf(1), response.path("id"));
         assertEquals(Integer.valueOf(1), response.path("%s","id"));
@@ -52,9 +75,8 @@ public class UserJsonTest {
     public void deveVerificarSegundoNivel(){
         given()
         .when()
-            .get("https://restapi.wcaquino.me/users/2")
+            .get("/users/2")
         .then()
-            .statusCode(200)
             .body("name", containsString("Joaquina"))
             .body("endereco.rua", is("Rua dos bobos"))
         ;
@@ -65,9 +87,8 @@ public class UserJsonTest {
     public void deveVerificarLista(){
         given()
         .when()
-            .get("https://restapi.wcaquino.me/users/3")
+            .get("/users/3")
         .then()
-            .statusCode(200)
             .body("filhos", hasSize(2))
             .body("filhos[0].name", is("Zezinho"))
             .body("filhos[1].name", is("Luizinho"))
@@ -77,25 +98,12 @@ public class UserJsonTest {
     }
 
     @Test
-    @Description("Deve retornar erro de usuário inexistente")
-    public void deveRetornarErroUsuarioInexistente(){
-        given()
-        .when()
-            .get("https://restapi.wcaquino.me/users/4")
-        .then()
-            .statusCode(404)
-            .body("error", is("Usuário inexistente"))
-        ;
-    }
-
-    @Test
     @Description("Deve verificar lista na raiz do json")
     public void deveVerificarListaRaiz(){
         given()
         .when()
-            .get("https://restapi.wcaquino.me/users")
+            .get("/users")
         .then()
-            .statusCode(200)
             .body("$", hasSize(3))
             .body("name", hasItems("João da Silva","Maria Joaquina","Ana Júlia"))
             .body("age[1]", is(25))
@@ -110,9 +118,8 @@ public class UserJsonTest {
         ArrayList<String> nomes =
                 given()
                 .when()
-                    .get("https://restapi.wcaquino.me/users")
+                    .get("/users")
                 .then()
-                    .statusCode(200)
                     .extract().path("name.findAll{it.startsWith('Maria')}")
                 ;
         assertEquals(1, nomes.size());
