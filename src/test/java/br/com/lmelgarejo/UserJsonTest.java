@@ -117,6 +117,6 @@ public class UserJsonTest {
                 ;
         assertEquals(1, nomes.size());
         assertTrue(nomes.get(0).equalsIgnoreCase("mAria Joaquina"));
-        assertEquals(nomes.get(0).toUpperCase(), "maria joaquina");
+        assertEquals(nomes.get(0).toUpperCase(), "maria joaquina".toUpperCase());
     }
 }
