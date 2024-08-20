@@ -27,7 +27,7 @@ public class UserJsonTest {
         .then()
             .statusCode(200)
             .body("id", is(1))
-            .body("name", containsString("Silvf"))
+            .body("name", containsString("Silva"))
             .body("age", greaterThan(18))
         ;
     }
