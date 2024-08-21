@@ -88,7 +88,6 @@ public class VerbosTest {
                     .as(UserPojo.class)
         ;
 
-        System.out.println(usuarioInserido);
         assertThat(usuarioInserido.getId(), notNullValue());
         assertEquals("Usuario deserializado", usuarioInserido.getName());
         assertThat(usuarioInserido.getAge(), is(35));
