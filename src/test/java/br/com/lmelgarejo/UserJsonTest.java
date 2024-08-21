@@ -2,7 +2,6 @@ package br.com.lmelgarejo;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -122,7 +121,7 @@ public class UserJsonTest {
                     .extract().path("name.findAll{it.startsWith('Maria')}")
                 ;
         assertEquals(1, nomes.size());
-        assertTrue(nomes.get(0).equalsIgnoreCase("mAria Joaquina"));
-        assertEquals(nomes.get(0).toUpperCase(), "maria joaquina".toUpperCase());
+        assertTrue(nomes.getFirst().equalsIgnoreCase("mAria Joaquina"));
+        assertEquals(nomes.getFirst().toUpperCase(), "maria joaquina".toUpperCase());
     }
 }

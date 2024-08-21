@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-public class HTML {
+public class HTMLTest {
 
     @Test
     public void deveFazerBuscasComHTML(){

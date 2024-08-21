@@ -1,5 +1,7 @@
 package br.com.lmelgarejo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class UserPojo {
 
     private Long id;
@@ -7,12 +9,12 @@ public class UserPojo {
     private Integer age;
     private Double salary;
 
-    public UserPojo() {
-    }
-
     public UserPojo(String name, Integer age) {
         this.name = name;
         this.age = age;
+    }
+
+    public UserPojo() {
     }
 
     public Long getId() {
@@ -47,13 +49,4 @@ public class UserPojo {
         this.salary = salary;
     }
 
-    @Override
-    public String toString() {
-        return "UserPojo{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
 }
