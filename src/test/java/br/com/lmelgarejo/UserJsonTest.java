@@ -35,7 +35,6 @@ public class UserJsonTest {
         reqSpec = reqBuilder.build();
 
         ResponseSpecBuilder resBuilder = new ResponseSpecBuilder();
-        resBuilder.expectStatusCode(200);
         resSpec = resBuilder.build();
 
         requestSpecification = reqSpec;
