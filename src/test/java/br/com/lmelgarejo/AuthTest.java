@@ -87,8 +87,8 @@ public class AuthTest {
     @Test
     public void deveFazerAutenticacaoComTokenJWT(){
         Map<String, String> login = new HashMap<>();
-        login.put("email","leonardo_melgarejo@hotmail.com");
-        login.put("senha", "Melga_01@");
+        login.put("email","melgarejom.leonardo@gmail.com");
+        login.put("senha", "1234");
 
         String token = given()
             .log().all()
@@ -117,8 +117,8 @@ public class AuthTest {
     public void deveAcessarAplicacaoWeb(){
         String cookie = given()
             .log().all()
-            .formParam("email", "leonardo_melgarejo@hotmail.com")
-            .formParam("senha", "Melga_01@")
+            .formParam("email", "melgarejom.leonardo@gmail.com")
+            .formParam("senha", "1234")
             .contentType(ContentType.URLENC.withCharset("UTF-8"))
         .when()
             .post("https://seubarriga.wcaquino.me/logar")
