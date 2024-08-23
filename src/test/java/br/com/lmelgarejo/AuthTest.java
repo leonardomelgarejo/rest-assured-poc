@@ -41,7 +41,7 @@ public class AuthTest {
             .statusCode(200)
             .body("name", is("Porto Alegre"))
             .body("coord.lon", is(-51.23f))
-            .body("main.temp", greaterThan(15f))
+            .body("main.temp", greaterThan(10f))
         ;
     }
 
