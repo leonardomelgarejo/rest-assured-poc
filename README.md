@@ -20,10 +20,10 @@ Este é um projeto de estudo sobre automação de testes de APIs Rest usando as 
 │   │   │            └── lmelgarejo
 │   │   └── resources                   
 │   └── test
-│       ├── java
-│       │   └── br
-│       │       └── com
-│       │            └── lmelgarejo
+│       └── java
+│           └── br
+│               └── com
+│                   └── lmelgarejo
 ├── .gitignore
 ├── pom.xml
 └── README.md
